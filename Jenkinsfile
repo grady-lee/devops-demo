@@ -5,7 +5,7 @@ pipeline{
 
     // 环境信息
     environment {
-        WS = ${WORKSPACE}
+        WS = "${WORKSPACE}"
     }
 
     // 流水线阶段
