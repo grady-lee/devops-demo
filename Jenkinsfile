@@ -12,6 +12,7 @@ pipeline{
     stages {
        stage('环境检查') {
             steps {
+                // /var/jenkins_home/workspace/devops-demo
                 sh 'pwd & ls -alh' // 查看工作目录
                 sh 'printenv' // 查看默认配置
                 sh 'java -version'
@@ -23,7 +24,6 @@ pipeline{
             // 使用自定义代理，需要安装docker pipeline插件,
             //  ubuntu需要添加当前用户到docker组,cd /var/run/,sudo chmod 777 docker.sock
             agent {
-               // 使用自定义agent会创建临时workspace，下一阶段会回到默认workspace
                docker {
                     // 用完容器关闭删除，镜像存在
                     image 'maven:3-alpine'
@@ -34,6 +34,7 @@ pipeline{
             }
             steps {
                 sh 'mvn -v'
+                // /var/jenkins_home/workspace/devops-demo@2
                 sh 'pwd & ls -alh'
                 // 打包并指定配置文件
                 sh 'mvn clean package -s "/var/jenkins_home/config/maven/settings.xml" -Dmaven.test.skip=true'
@@ -42,6 +43,7 @@ pipeline{
         // 2. 代码测试
         stage('测试') {
             steps {
+                // /var/jenkins_home/workspace/devops-demo
                 sh 'pwd & ls -alh'
                 echo "测试"
             }
@@ -58,6 +60,7 @@ pipeline{
             steps {
                 sh 'pwd & ls -lah'
                 echo "构建镜像"
+                sh 'docker build -t devops-java .'
             }
         }
         // 5. 部署
