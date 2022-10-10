@@ -73,5 +73,11 @@ pipeline{
                 sh 'docker run -d -p 8888:8080 --name devops-java devops-java:v1'
             }
         }
+        // 6. 报告
+        stage('报告'){
+            steps {
+                echo '发送邮件，查看模板'
+            }
+        }
     }
 }
