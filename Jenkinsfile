@@ -5,7 +5,7 @@ pipeline{
 
     // 环境信息
     environment {
-
+        name="123"
     }
 
     // 流水线阶段
