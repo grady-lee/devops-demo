@@ -26,7 +26,7 @@ pipeline{
                docker {
                     image 'maven:3-alpine'
                     // 相当于docker run -v 
-                    args '-v $HOME/.m2:/home/.m2'
+                    args '-v /var/jenkins_home/config/maven/.m2:/root/.m2'
 
                }
             }
