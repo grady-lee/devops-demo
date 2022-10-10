@@ -3,7 +3,7 @@ FROM openjdk:8-jre-alpine
 LABEL maintainer=grady
 
 # 复制jar包
-COPY target/*.tar /app.jar
+COPY target/*.jar /app.jar
 RUN apk add -U tzdata; \
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime; \
 echo 'Asia/Shanghai' > /etc/timezone; \
