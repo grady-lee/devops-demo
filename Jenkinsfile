@@ -5,7 +5,7 @@ pipeline{
 
     // 环境信息
     environment {
-        name="123"
+        WS=${WORKSPACE}
     }
 
     // 流水线阶段
@@ -36,8 +36,9 @@ pipeline{
                 sh 'mvn -v'
                 // /var/jenkins_home/workspace/devops-demo@2
                 sh 'pwd & ls -alh'
+                echo '${WS}'
                 // 打包并指定配置文件
-                sh 'mvn clean package -s "/var/jenkins_home/config/maven/settings.xml" -Dmaven.test.skip=true'
+                sh 'cd ${WS} && mvn clean package -s "/var/jenkins_home/config/maven/settings.xml" -Dmaven.test.skip=true'
             }
         }
         // 2. 代码测试
@@ -60,7 +61,7 @@ pipeline{
             steps {
                 sh 'pwd & ls -lah'
                 echo "构建镜像"
-                sh 'docker build -t devops-java .'
+                sh 'docker build -t devops-java:v1 .'
             }
         }
         // 5. 部署
@@ -68,6 +69,7 @@ pipeline{
             steps {
                 sh 'pwd & ls -lah'
                 echo "部署"
+                sh 'docker run -d -p 8080:8080 --name devops-java devops-java:v1'
             }
         }
     }
