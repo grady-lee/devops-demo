@@ -69,7 +69,8 @@ pipeline{
             steps {
                 sh 'pwd & ls -lah'
                 echo "部署"
-                sh 'docker run -d -p 8080:8080 --name devops-java devops-java:v1'
+                sh 'docker rm -f devops-java'
+                sh 'docker run -d -p 8888:8080 --name devops-java devops-java:v1'
             }
         }
     }
