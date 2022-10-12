@@ -79,7 +79,7 @@ pipeline{
             }
             steps{
                 script{
-                    def where = ${DEPOLY_WHERE}
+                    def where = "${DEPOLY_WHERE}"
 
                     if(where == "bj01"){
                         sh "echo 部署到bj01区了"
