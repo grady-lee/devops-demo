@@ -89,12 +89,12 @@ pipeline{
                         sh "echo 部署到tj03区了"
 
                         // 推送到阿里云仓库
-                        // docker login -u ${ALIYUN_SECRTE_USR} -p ${ALIYUN_SECRTE_PSW} registry.cn-hangzhou.aliyuncs.com
-                        withCredentials([usernamePassword(credentialsId: 'aliyun',
+                        docker login -u ${ALIYUN_SECRTE_USR} -p ${ALIYUN_SECRTE_PSW} registry.cn-hangzhou.aliyuncs.com
+                        /*withCredentials([usernamePassword(credentialsId: 'aliyun',
                                                     passwordVariable: 'ali_pwd',
                                                     usernameVariable: 'ali_user')]) {
                             sh "docker login -u ${ali_user} -p ${ali_pwd} registry.cn-hangzhou.aliyuncs.com"
-                         }
+                         }*/
 
                         sh "docker tag devops-demo registry.cn-hangzhou.aliyuncs.com/grady/devops-demo:${APP_VER}"
                         sh "docker push registry.cn-hangzhou.aliyuncs.com/grady/devops-demo:${APP_VER}"
