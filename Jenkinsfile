@@ -120,8 +120,8 @@ pipeline{
             steps {
                 sh 'pwd & ls -lah'
                 echo "部署"
-                sh 'docker rm -f devops-java'
-                sh 'docker run -d -p 8888:8080 --name devops devops-java'
+                sh 'docker rm -f devops'
+                sh 'docker run -d -p 8888:8080 --name devops devops-demo'
             }
 
             //后置执行
