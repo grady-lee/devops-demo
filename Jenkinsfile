@@ -63,7 +63,7 @@ pipeline{
             steps {
                 sh 'pwd & ls -lah'
                 echo "构建镜像"
-                sh 'docker build -t devops-java .'
+                sh 'docker build -t devops-demo .'
             }
         }
         // 5. 推送镜像到阿里云仓库(在Jenkins凭据管理中配置用户名和密码)
