@@ -94,9 +94,11 @@ pipeline{
                                                     passwordVariable: 'ali_pwd',
                                                     usernameVariable: 'ali_user')]) {
                             sh "docker login -u ${ali_user} -p ${ali_pwd} registry.cn-hangzhou.aliyuncs.com"
-                            sh "docker tag devops-demo registry.cn-hangzhou.aliyuncs.com/grady/devops-demo:${APP_VER}"
-                           sh "docker push registry.cn-hangzhou.aliyuncs.com/grady/devops-demo:${APP_VER}"
                          }
+
+                        sh "docker tag devops-demo registry.cn-hangzhou.aliyuncs.com/grady/devops-demo:${APP_VER}"
+                        sh "docker push registry.cn-hangzhou.aliyuncs.com/grady/devops-demo:${APP_VER}"
+
 
                         //ssh 秘钥文件配置到 jenkins 全局秘钥中
                         /* withCredentials(ssh){
@@ -135,7 +137,6 @@ pipeline{
             //                 echo "成了..."
             //               }
             //             }
-                    }
         }
         // 6. 报告
         stage('报告'){
@@ -162,5 +163,5 @@ pipeline{
                 // 版本的保存。代码的保存。镜像的保存。存到远程仓库
             }
         }
-  }
+    }
 }
